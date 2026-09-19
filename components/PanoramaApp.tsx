@@ -85,8 +85,8 @@ export function PanoramaApp() {
     if (slides.length < 2) { setError('Choose at least two carousel images.'); return; }
     setError(''); setWarning(''); setStage('checking'); setProgress('Checking dimensions...');
     if (!matching) setWarning('Slide dimensions do not match. Images will not be stretched; the output canvas uses the largest cross-axis size.');
-    const direct = slides.slice(0, -1).map((s, i) => ({ leftSlideId: s.id, rightSlideId: slides[i + 1].id, detectedOverlap: 0, manualOverlap: null, confidence: 0, status: 'direct' as const }));
-    let calculated = direct;
+    const direct: SeamState[] = slides.slice(0, -1).map((s, i) => ({ leftSlideId: s.id, rightSlideId: slides[i + 1].id, detectedOverlap: 0, manualOverlap: null, confidence: 0, status: 'direct' }));
+    let calculated: SeamState[] = direct;
     if (autoDetect) {
       setStage('analyzing'); setProgress('Analyzing seams...');
       calculated = [];
